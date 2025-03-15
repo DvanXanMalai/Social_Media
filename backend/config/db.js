@@ -1,13 +1,13 @@
-import { Client } from "pg";
+import pkg from 'pg'
+import dotenv from 'dotenv'
 
-const client = new Client({
-    host: 'localhost',
-    port: 5432,
-    database: 'social_media',
-    user: 'postgres',
-    password: 'root'
+const { Pool } = pkg
+
+dotenv.config()
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 })
 
-client.connect()
-    .then(() => console.log('connected to postgresql'))
-    .catch(err => console.error('connection error', err.stack))
+export default pool

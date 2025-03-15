@@ -1,19 +1,32 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import pool from './config/db.js';
+import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import postRouter from './routes/postRoute.js';
+import followRouter from './routes/followRoute.js';
 
 dotenv.config();
 
 const app = express();
 
-//Passport Configuration
-import './config/passport.js';
-
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
+//Routes
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+app.use('/posts', postRouter);
+app.use('/account', followRouter)
 
+app.get('/', async (req, res) => {
+    const response = await pool.query('SELECT * FROM social_media.users');
+    res.status(200).send(response.rows);
+});
 
 app.listen(5000, () => {
-    console.log('Server running on http://localhost:5000')
-})
+    console.log('Server running on http://localhost:5000');
+});
