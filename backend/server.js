@@ -6,6 +6,7 @@ import authRouter from './routes/authRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import postRouter from './routes/postRoute.js';
 import followRouter from './routes/followRoute.js';
+import commentRoute from './routes/commentRoute.js';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
 app.use('/account', followRouter)
+app.use('/posts/comments', commentRoute)
 
 app.get('/', async (req, res) => {
     const response = await pool.query('SELECT * FROM social_media.users');
