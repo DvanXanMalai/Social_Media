@@ -7,6 +7,7 @@ import userRouter from './routes/userRoutes.js';
 import postRouter from './routes/postRoute.js';
 import followRouter from './routes/followRoute.js';
 import commentRoute from './routes/commentRoute.js';
+import profileRouter from './routes/profileRoute.js';
 
 dotenv.config();
 
@@ -19,10 +20,17 @@ app.use(cors());
 
 //Routes
 app.use('/auth', authRouter);
+
 app.use('/user', userRouter);
+
 app.use('/posts', postRouter);
+
 app.use('/account', followRouter)
+
 app.use('/posts/comments', commentRoute)
+
+app.use('/profile', profileRouter)
+app.use('/uploads/profile_pics', express.static('uploads/profile_pics')) //serve images
 
 app.get('/', async (req, res) => {
     const response = await pool.query('SELECT * FROM social_media.users');
