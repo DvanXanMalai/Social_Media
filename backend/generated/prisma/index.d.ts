@@ -1253,7 +1253,9 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: number | null
     username: string | null
+    image: string | null
     email: string | null
+    bio: string | null
     password: string | null
     createdAt: Date | null
   }
@@ -1261,7 +1263,9 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: number | null
     username: string | null
+    image: string | null
     email: string | null
+    bio: string | null
     password: string | null
     createdAt: Date | null
   }
@@ -1269,7 +1273,9 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     username: number
+    image: number
     email: number
+    bio: number
     password: number
     createdAt: number
     _all: number
@@ -1287,7 +1293,9 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     username?: true
+    image?: true
     email?: true
+    bio?: true
     password?: true
     createdAt?: true
   }
@@ -1295,7 +1303,9 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     username?: true
+    image?: true
     email?: true
+    bio?: true
     password?: true
     createdAt?: true
   }
@@ -1303,7 +1313,9 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     username?: true
+    image?: true
     email?: true
+    bio?: true
     password?: true
     createdAt?: true
     _all?: true
@@ -1398,7 +1410,9 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: number
     username: string
+    image: string
     email: string
+    bio: string
     password: string
     createdAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1425,7 +1439,9 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
+    image?: boolean
     email?: boolean
+    bio?: boolean
     password?: boolean
     createdAt?: boolean
     posts?: boolean | User$postsArgs<ExtArgs>
@@ -1438,7 +1454,9 @@ export namespace Prisma {
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
+    image?: boolean
     email?: boolean
+    bio?: boolean
     password?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1446,7 +1464,9 @@ export namespace Prisma {
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     username?: boolean
+    image?: boolean
     email?: boolean
+    bio?: boolean
     password?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1454,12 +1474,14 @@ export namespace Prisma {
   export type UserSelectScalar = {
     id?: boolean
     username?: boolean
+    image?: boolean
     email?: boolean
+    bio?: boolean
     password?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "image" | "email" | "bio" | "password" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
     likes?: boolean | User$likesArgs<ExtArgs>
@@ -1481,7 +1503,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       username: string
+      image: string
       email: string
+      bio: string
       password: string
       createdAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1913,7 +1937,9 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
+    readonly image: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly bio: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
@@ -5725,7 +5751,9 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     username: 'username',
+    image: 'image',
     email: 'email',
+    bio: 'bio',
     password: 'password',
     createdAt: 'createdAt'
   };
@@ -5856,7 +5884,9 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
+    image?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    bio?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
@@ -5868,7 +5898,9 @@ export namespace Prisma {
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     username?: SortOrder
+    image?: SortOrder
     email?: SortOrder
+    bio?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     posts?: PostOrderByRelationAggregateInput
@@ -5884,6 +5916,8 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    image?: StringFilter<"User"> | string
+    bio?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
@@ -5895,7 +5929,9 @@ export namespace Prisma {
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
+    image?: SortOrder
     email?: SortOrder
+    bio?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -5911,7 +5947,9 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
+    image?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    bio?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -6080,7 +6118,9 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutAuthorInput
@@ -6092,7 +6132,9 @@ export namespace Prisma {
   export type UserUncheckedCreateInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -6103,7 +6145,9 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutAuthorNestedInput
@@ -6115,7 +6159,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -6127,14 +6173,18 @@ export namespace Prisma {
   export type UserCreateManyInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6142,7 +6192,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6349,7 +6401,9 @@ export namespace Prisma {
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    image?: SortOrder
     email?: SortOrder
+    bio?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
   }
@@ -6361,7 +6415,9 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    image?: SortOrder
     email?: SortOrder
+    bio?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
   }
@@ -6369,7 +6425,9 @@ export namespace Prisma {
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
+    image?: SortOrder
     email?: SortOrder
+    bio?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
   }
@@ -7191,7 +7249,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutPostsInput = {
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     likes?: LikeCreateNestedManyWithoutUserInput
@@ -7202,7 +7262,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutPostsInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     likes?: LikeUncheckedCreateNestedManyWithoutUserInput
@@ -7247,7 +7309,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPostsInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likes?: LikeUpdateManyWithoutUserNestedInput
@@ -7258,7 +7322,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutPostsInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     likes?: LikeUncheckedUpdateManyWithoutUserNestedInput
@@ -7284,7 +7350,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutLikesInput = {
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutAuthorInput
@@ -7295,7 +7363,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutLikesInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -7341,7 +7411,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutLikesInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutAuthorNestedInput
@@ -7352,7 +7424,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutLikesInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -7388,7 +7462,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutFollowingInput = {
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutAuthorInput
@@ -7399,7 +7475,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutFollowingInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -7414,7 +7492,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutFollowersInput = {
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutAuthorInput
@@ -7425,7 +7505,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutFollowersInput = {
     id?: number
     username: string
+    image?: string
     email: string
+    bio?: string
     password: string
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -7451,7 +7533,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutFollowingInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutAuthorNestedInput
@@ -7462,7 +7546,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutFollowingInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -7483,7 +7569,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutFollowersInput = {
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutAuthorNestedInput
@@ -7494,7 +7582,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutFollowersInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput

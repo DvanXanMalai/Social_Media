@@ -8,43 +8,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  username String @unique
-  email String @unique 
-  password String 
-  posts Post[]
-  likes Like[]
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  image     String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s")
+  email     String   @unique
+  bio       String   @default("")
+  password  String
+  posts     Post[]
+  likes     Like[]
   following Follow[] @relation("Following")
   followers Follow[] @relation("Followers")
   createdAt DateTime @default(now())
 }
 
-model Post{
-  id Int @id @default(autoincrement())
-  content String
-  image String?
-  author User @relation(fields:[authorId],references:[id])
-  authorId Int
-  likes Like[]
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  image     String?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  likes     Like[]
   createdAt DateTime @default(now())
 }
 
-model Like{
-  id Int @id @default(autoincrement())
-  user User @relation(fields:[userId],references:[id])
-  post Post @relation(fields:[postId], references: [id])
+model Like {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  post   Post @relation(fields: [postId], references: [id])
   userId Int
   postId Int
 
   @@unique([userId, postId])
 }
 
-model Follow{
-  id Int @id @default(autoincrement())
-  follower User @relation("Following", fields:[followerId],references:[id])
-  following User @relation("Followers", fields:[followingId],references:[id])
-  followerId Int
+model Follow {
+  id          Int  @id @default(autoincrement())
+  follower    User @relation("Following", fields: [followerId], references: [id])
+  following   User @relation("Followers", fields: [followingId], references: [id])
+  followerId  Int
   followingId Int
 
   @@unique([followerId, followingId])

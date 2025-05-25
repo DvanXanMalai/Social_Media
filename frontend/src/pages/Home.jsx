@@ -1,21 +1,16 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import CreatePostModal from '../components/CreatePostModal';
 
 function Home() {
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-  }, [navigate]);
-
   return (
-    <div className="p-6 h-screen flex justify-center items-center">
-      <h1 className="text-2xl justify-center font-bold">
-        Welcome to Mini Social Media 🚀
-      </h1>
+    <div>
+      <CreatePostModal />
+      <p>feed</p>
     </div>
   );
 }

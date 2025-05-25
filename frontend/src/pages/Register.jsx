@@ -23,7 +23,7 @@ function Register() {
         <div className="flex justify-center items-center h-screen">
             <div className="card w-96 bg-base-100 card-lg  shadow-sm">
                 <div className="card-body">
-                    <h2 className="card-title">Register</h2>
+                    <p className="card-title">Register</p>
                     <input
                         type="text"
                         placeholder="Username"

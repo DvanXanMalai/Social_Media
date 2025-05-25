@@ -67,3 +67,30 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const fetchProfile = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const profile = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+      },
+    });
+    if (!profile) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(profile);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const validateToken = async (req, res) => {
+  return res.status(200).json({ valid: true, user: req.user });
+};

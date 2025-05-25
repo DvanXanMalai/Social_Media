@@ -1,31 +1,33 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../api/axios";
-import "../index.css";
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import axios from '../api/axios';
+import '../index.css';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      navigate("/");
+      await login(email, password);
+      navigate('/');
     } catch (err) {
       alert(
-        err.response?.data?.message || "Something went wrong, Login failed.",
+        err.response?.data?.message || 'Something went wrong, Login failed.',
       );
     }
   };
   return (
     <div className="flex justify-center items-center h-screen font-poppins">
-      {" "}
+      {' '}
       <div className="card w-96 bg-base-100 card-lg shadow-sm">
         <div className="card-body">
-          <h2 className="card-title">Login</h2>
+          <p className="card-title">Login</p>
           <input
             type="text"
             placeholder="email"

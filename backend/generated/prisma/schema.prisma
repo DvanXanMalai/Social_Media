@@ -11,7 +11,9 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
+  image     String   @default("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s")
   email     String   @unique
+  bio       String   @default("")
   password  String
   posts     Post[]
   likes     Like[]
