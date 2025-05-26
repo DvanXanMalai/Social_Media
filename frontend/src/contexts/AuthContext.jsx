@@ -6,13 +6,15 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   //fetch user profile
   const fetchProfile = async () => {
     try {
-      const res = await axios.get('/auth/profile');
+      const res = await axios.get('/profile');
       setUser(res.data);
+      setIsLoading(false);
     } catch (error) {
       setUser(null);
     }

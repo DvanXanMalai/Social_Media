@@ -16,26 +16,43 @@ export const getProfile = async (req, res) => {
 };
 
 export const updateProfile = async (req, res) => {
-  // console.log('called', req.body);
-  const { email, username, bio } = req.body.user;
-  console.log('userData', email, username, bio);
+  const { email, username, bio } = req.body;
+
+  const imagePath = req.file
+    ? `${process.env.BASE_URL || 'http://localhost:5000'}/uploads/${req.file.filename}`
+    : null;
+
+  // Only update image if a new one was uploaded
+  // if (req.file) {
+  //   user.image = `${process.env.BASE_URL || 'http://localhost:5000'}/uploads/${req.file.filename}`;
+  // }
+
+  // const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+  // console.log('imagepath', imagePath);
+  // console.log('imagefile from react', req.file);
+
   const userId = req.user.id;
-  console.log('userid', userId);
 
   try {
-    const result = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
     });
-    console.log('user', result);
+    if (!existingUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const updatedData = { email, bio, username }; // Start with common fields
+
+    if (imagePath !== null) {
+      updatedData.image = imagePath; // Add image only if it exists
+    }
+
     const updatedUser = await prisma.user.update({
       where: {
         id: userId,
       },
-      data: { email, bio, username },
+      data: updatedData,
     });
-    console.log('updated user', updatedUser);
     res.json(updatedUser);
   } catch (err) {
     res.status(500).json({ error: 'Failed to update profile' });

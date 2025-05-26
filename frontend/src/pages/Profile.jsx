@@ -3,25 +3,37 @@ import axios from '../api/axios'; // your axios instance
 import input from 'daisyui/components/input';
 
 const Profile = () => {
-  const [user, setUser] = useState({ username: '', email: '', bio: ' ' });
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    bio: '',
+    image: '',
+  });
   const [editing, setEditing] = useState(false);
-  const [bio, setBio] = useState('');
 
   useEffect(() => {
     axios.get('/profile').then((res) => {
       setUser(res.data);
-      console.log(res.data);
-      setBio(res.data.bio);
     });
   }, []);
 
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData });
-  // };
-
   const handleUpdate = async () => {
     try {
-      const res = await axios.put('/profile', { user });
+      const formData = new FormData();
+      formData.append('username', user.username);
+      formData.append('email', user.email);
+      formData.append('bio', user.bio);
+
+      if (user.image instanceof File) {
+        formData.append('image', user.image);
+      }
+
+      const res = await axios.put('/profile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
       setUser(res.data);
       setEditing(false);
     } catch (err) {
@@ -36,7 +48,13 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold">Edit Profile</h2>
           <div className="avatar">
             <div className="w-24 rounded-full">
-              <img src={user.image} alt="User Avatar" />{' '}
+              {user.image ? (
+                <img src={user.imagePreview || user.image} alt="User Avatar" />
+              ) : (
+                <div className="bg-gray-300 w-full h-full flex items-center justify-center text-xl">
+                  ?
+                </div>
+              )}
             </div>
           </div>
 
@@ -49,10 +67,31 @@ const Profile = () => {
               id="username"
               type="text"
               placeholder="username"
-              className="input w-full" // <--- ADDED w-full here
+              className="input w-full"
               value={user.username}
               onChange={(e) => {
                 setUser({ ...user, username: e.target.value });
+              }}
+            />
+          </div>
+          {/*image field*/}
+          <div className="flex flex-col w-full max-w-xs">
+            <label htmlFor="image" className="text-lg mb-1">
+              Image:
+            </label>
+
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              className="file-input file-input-info"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setUser({
+                  ...user,
+                  image: file,
+                  imagePreview: URL.createObjectURL(file), // 👈 add this
+                });
               }}
             />
           </div>

@@ -1,24 +1,28 @@
 const CreatePostModal = () => {
   return (
-    <>
-      <label htmlFor="my_modal_6" className="btn btn-primary">
+    <div className="flex flex-col p-6">
+      <p className="font-bold mb-4">What's on your mind?</p>
+      <button
+        className="btn btn-primary w-sm"
+        onClick={() => document.getElementById('my_modal_1').showModal()}
+      >
         Create Post
-      </label>
-
-      {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-      <div className="modal" role="dialog">
+      </button>
+      <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold">Hello!</h3>
-          <p className="py-4">This modal works with a hidden checkbox!</p>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
           <div className="modal-action">
-            <label htmlFor="my_modal_6" className="btn">
-              Close!
-            </label>
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
           </div>
         </div>
-      </div>
-    </>
+      </dialog>
+    </div>
   );
 };
 
