@@ -86,7 +86,7 @@ export const fetchProfile = async (req, res) => {
     }
     res.json(profile);
   } catch (err) {
-    console.log(err);
+    console.log('err', err);
     res.status(500).json({ message: 'Server error' });
   }
 };

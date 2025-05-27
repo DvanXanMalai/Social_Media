@@ -8,6 +8,7 @@ const Profile = () => {
     email: '',
     bio: '',
     image: '',
+    imagePreview: '',
   });
   const [editing, setEditing] = useState(false);
 
@@ -16,6 +17,10 @@ const Profile = () => {
       setUser(res.data);
     });
   }, []);
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData });
+  // };
 
   const handleUpdate = async () => {
     try {
@@ -35,6 +40,7 @@ const Profile = () => {
       });
 
       setUser(res.data);
+      console.log(res);
       setEditing(false);
     } catch (err) {
       console.error(err);
@@ -48,12 +54,10 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold">Edit Profile</h2>
           <div className="avatar">
             <div className="w-24 rounded-full">
-              {user.image ? (
-                <img src={user.imagePreview || user.image} alt="User Avatar" />
+              {user.imagePreview ? (
+                <img src={user.imagePreview} alt="User Avatar" />
               ) : (
-                <div className="bg-gray-300 w-full h-full flex items-center justify-center text-xl">
-                  ?
-                </div>
+                <img src={user.image} alt="User Avatar" />
               )}
             </div>
           </div>
@@ -67,7 +71,7 @@ const Profile = () => {
               id="username"
               type="text"
               placeholder="username"
-              className="input w-full"
+              className="input w-full" // <--- ADDED w-full here
               value={user.username}
               onChange={(e) => {
                 setUser({ ...user, username: e.target.value });
@@ -141,7 +145,7 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold">Profile</h2>
           <div className="avatar">
             <div className="w-24 rounded-full">
-              <img src={user.image} alt="User Avatar" />{' '}
+              <img src={user.image ? user.image : ' '} alt="User Avatar" />
             </div>
           </div>
           <p className="text-lg">

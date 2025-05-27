@@ -9,6 +9,10 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  // if (localStorage.getItem('token') === null) {
+  //   setIsLoading(false);
+  // }
+
   //fetch user profile
   const fetchProfile = async () => {
     try {
@@ -17,6 +21,8 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(false);
     } catch (error) {
       setUser(null);
+    } finally {
+      setIsLoading(false);
     }
   };
   //Login function
@@ -42,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

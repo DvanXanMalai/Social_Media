@@ -11,17 +11,17 @@ import Profile from './pages/Profile';
 import NavBar from './components/NavBar.jsx';
 
 const App = () => {
-  const { loading } = useContext(AuthContext);
-
-  if (loading) {
-    <div className="flex justify-center items-center h-screen">
-      <span className="loading loading-spinner text-primary"></span>
-    </div>;
-  }
-
+  // const { isLoading } = useContext(AuthContext);
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <span className="loading loading-spinner text-primary"></span>
+  //     </div>
+  //   );
+  // }
   return (
     <>
-      {/* <NavBar /> */}
+      <NavBar />
       <Routes>
         <Route
           path="/"

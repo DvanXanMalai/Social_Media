@@ -1,11 +1,19 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import CreatePostModal from '../components/CreatePostModal';
+import Feed from '../components/Feed';
 
 function Home() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-base-200 p-6">
@@ -26,7 +34,7 @@ function Home() {
           <div className="card bg-base-100 shadow-md p-6 flex flex-col items-center gap-4">
             <Link to="/profile" className="avatar hover:opacity-80 transition">
               <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                {user.image ? (
+                {user?.image ? (
                   <img
                     src={user.imagePreview || user.image}
                     alt="User Avatar"
@@ -57,7 +65,7 @@ function Home() {
           {/* Placeholder for posts */}
           <div className="card bg-base-100 shadow p-4">
             <p className="text-gray-500 text-center">
-              No posts yet. Be the first to share something!
+              <Feed />
             </p>
           </div>
         </main>

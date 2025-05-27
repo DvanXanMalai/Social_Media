@@ -1,7 +1,16 @@
 import React, { useContext } from 'react';
 import { AuthContext, AuthProvider } from '../contexts/AuthContext'; // Adjust the import path as necessary
 const NavBar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, isLoading } = useContext(AuthContext);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
@@ -20,7 +29,7 @@ const NavBar = () => {
               <img
                 alt="Tailwind CSS Navbar component"
                 src={
-                  user.image ||
+                  user?.image ||
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s'
                 }
               />

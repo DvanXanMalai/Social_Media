@@ -14,7 +14,12 @@ const PrivateRoute = ({ children }) => {
     };
     check();
   }, []);
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    );
   return isValid ? children : <Navigate to="/login" />; // Redirect to login if token is invalid
 };
 
