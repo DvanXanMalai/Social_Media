@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/axios'; // your axios instance
-import input from 'daisyui/components/input';
+import UserPosts from '../components/UserPosts';
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -165,6 +165,12 @@ const Profile = () => {
           >
             Edit Profile
           </button>
+
+          <p className="text-lg">
+            <strong>My Posts:</strong>{' '}
+          </p>
+
+          <UserPosts />
         </div>
       )}
     </div>

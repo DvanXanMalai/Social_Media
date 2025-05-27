@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import CreatePostModal from '../components/CreatePostModal';
-import Feed from '../components/Feed';
+import UserPosts from '../components/UserPosts';
 
 function Home() {
   const { user, isLoading } = useContext(AuthContext);
@@ -16,11 +16,11 @@ function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-base-200 p-6">
+    <div className="min-h-screen bg-base-200 p-4 sm:p-6">
       {/* Header */}
-      <header className="flex justify-between items-center mb-6">
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
         <div>
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-2xl sm:text-3xl font-bold">
             Welcome, {user?.username || 'User'} 👋
           </h1>
           <p className="text-sm text-gray-500">Let’s share something today!</p>
@@ -31,9 +31,9 @@ function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Sidebar or Profile Summary */}
         <aside className="lg:col-span-1">
-          <div className="card bg-base-100 shadow-md p-6 flex flex-col items-center gap-4">
+          <div className="card bg-base-100 shadow-md p-4 sm:p-6 flex flex-col items-center gap-4">
             <Link to="/profile" className="avatar hover:opacity-80 transition">
-              <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+              <div className="w-20 sm:w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 {user?.image ? (
                   <img
                     src={user.imagePreview || user.image}
@@ -47,25 +47,27 @@ function Home() {
               </div>
             </Link>
             <div className="text-center">
-              <h2 className="text-xl font-semibold">{user?.username}</h2>
-              <p className="text-sm text-gray-500">{user?.email}</p>
+              <h2 className="text-lg sm:text-xl font-semibold">
+                {user?.username}
+              </h2>
+              <p className="text-sm text-gray-500 break-all">{user?.email}</p>
             </div>
-            {/* Optional future button */}
-            {/* <button className="btn btn-sm btn-outline">Edit Profile</button> */}
           </div>
         </aside>
 
         {/* Feed Section */}
         <main className="lg:col-span-2 space-y-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-semibold">Feed</h2>
-            <CreatePostModal />
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-semibold">Feed</h2>
+            <div className="w-full sm:w-auto">
+              <CreatePostModal />
+            </div>
           </div>
 
           {/* Placeholder for posts */}
           <div className="card bg-base-100 shadow p-4">
             <p className="text-gray-500 text-center">
-              <Feed />
+              here will be feed it is uder construction xd
             </p>
           </div>
         </main>

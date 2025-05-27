@@ -19,7 +19,7 @@ export const updateProfile = async (req, res) => {
   const { email, username, bio } = req.body;
 
   const imagePath = req.file
-    ? `${process.env.BASE_URL || 'http://localhost:5000'}/uploads/${req.file.filename}`
+    ? `${process.env.BASE_URL || 'http://192.168.18.254:5000'}/uploads/${req.file.filename}`
     : null;
 
   // Only update image if a new one was uploaded

@@ -13,8 +13,7 @@ const router = express.Router();
 
 router.post('/', authenticateToken, upload.single('image'), createPost);
 router.get('/feed', authenticateToken, getFeed);
-router.get('/:userId/posts', authenticateToken, getUserPosts);
+router.get('/:userId/posts', getUserPosts);
 router.delete('/:postId', authenticateToken, deletePost);
 
 export default router;
-

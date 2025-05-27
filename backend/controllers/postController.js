@@ -8,7 +8,7 @@ export const createPost = async (req, res) => {
   const { content } = req.body;
 
   const imagePath = req.file
-    ? `${process.env.BASE_URL || 'http://localhost:5000'}/uploads/${req.file.filename}`
+    ? `${process.env.BASE_URL || 'http://192.168.18.254:5000'}/uploads/${req.file.filename}`
     : null;
   try {
     const post = await prisma.post.create({
@@ -105,4 +105,3 @@ export const deletePost = async (req, res) => {
     res.status(500).json({ message: 'Error deleting post' });
   }
 };
-

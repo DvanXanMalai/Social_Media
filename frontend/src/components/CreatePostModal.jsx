@@ -35,7 +35,7 @@ const CreatePostModal = () => {
     <div className="flex flex-col p-6">
       <p className="font-bold mb-4">What's on your mind?</p>
       <button
-        className="btn btn-primary w-sm"
+        className="btn btn-primary w-full sm:w-auto max-w-full"
         onClick={() => document.getElementById('create_post_modal').showModal()}
       >
         Create Post
