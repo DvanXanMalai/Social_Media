@@ -88,7 +88,7 @@ const Profile = () => {
               type="file"
               name="image"
               accept="image/*"
-              className="file-input file-input-info"
+              className="file-input file-input-accent"
               onChange={(e) => {
                 const file = e.target.files[0];
                 setUser({

@@ -4,7 +4,8 @@ import authenticateToken from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/:postId', authenticateToken, likePost);
-router.delete('/:postId', authenticateToken, unlikePost);
+router.post('/like/:postId', authenticateToken, likePost);
+router.post('/unlike/:postId', authenticateToken, unlikePost);
 
 export default router;
+

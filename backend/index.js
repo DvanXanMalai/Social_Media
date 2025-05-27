@@ -25,7 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 
 //Like routes
-app.use('/api/like', likeRoutes);
+app.use('/api', likeRoutes);
 
 //Follow routes
 app.use('/api/follow', followRoutes);
