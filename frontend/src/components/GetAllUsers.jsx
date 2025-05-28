@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from '../api/axios'; // Adjust the import path as necessary
 import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate for navigation
+import { AuthContext } from '../contexts/AuthContext.jsx'; // Import AuthContext to access current user
 
 const GetAllUsers = () => {
+  const { user } = useContext(AuthContext); // Access the AuthContext to get the current user
+  const currentUserId = user?.id; // Get the current user's ID from the context
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleViewProfile = (userId) => {
@@ -14,13 +17,13 @@ const GetAllUsers = () => {
   //
 
   useEffect(() => {
+    if (!currentUserId) return; // If no current user, exit early
     // const response = await axios.get(`/users`);
     axios.get('/users').then((res) => {
-      const currentUserId = localStorage.getItem('userId'); // or from context if available
       const filtered = res.data.filter((u) => u.id !== parseInt(currentUserId));
       setUsers(filtered);
     });
-  }, []);
+  }, [currentUserId]); // Fetch users when currentUserId changes
 
   //get all users
 
