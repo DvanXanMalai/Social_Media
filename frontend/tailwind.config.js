@@ -11,7 +11,7 @@ export default {
       },
     },
   },
-  plugins: [daisyui],
+  plugins: [daisyui, require('@tailwindcss/line-clamp')],
   daisyui: {
     themes: ['acid'],
   },

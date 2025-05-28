@@ -71,13 +71,38 @@ const UserPosts = () => {
               key={post.id}
               className="card w-full bg-base-100 shadow-xl border border-base-200"
             >
-              <div className="card-body">
+              <div className="card-body bg-base-200 ">
+                <div className="flex gap-4">
+                  <div className="avatar">
+                    <div className="w-12 rounded-full">
+                      {user?.user.image ? (
+                        <img src={user.user.image} alt="User Avatar" />
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <p className="text-lg">
+                    <strong></strong> {user.user.username}
+                  </p>
+                </div>
                 {/* Post content here... */}
-                <p>{post.content}</p>
+                <strong>{post.content}</strong>
+
+                <div className="rounded-2xl shadow-xl overflow-hidden">
+                  {post.image ? (
+                    <div className="w-full h-80 flex items-center justify-center ">
+                      <img
+                        src={post.image}
+                        alt=" "
+                        className="w-full h-full object-cover rounded-2xl transition-transform duration-300 hover:scale-105"
+                      />
+                    </div>
+                  ) : null}
+                </div>
 
                 {/* Like button */}
                 <button
-                  className={`btn btn-soft btn-accent ${isLiked ? 'btn-active' : ''}`}
+                  className={`btn btn-outline btn-accent max-w-2xs ${isLiked ? 'btn-active' : ''}`}
                   onClick={() => handleToggleLike(post)}
                 >
                   {isLiked ? '💖' : '🤍'} {likeCount}{' '}

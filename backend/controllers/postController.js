@@ -2,9 +2,7 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 export const createPost = async (req, res) => {
-  console.log(req.body);
   const userId = req.user.id;
-  console.log('User ID:', userId);
   const { content } = req.body;
 
   const imagePath = req.file

@@ -35,7 +35,9 @@ const CreatePostModal = () => {
     <div className="flex flex-col p-6">
       <p className="font-bold mb-4">What's on your mind?</p>
       <button
-        className="btn btn-primary w-full sm:w-auto max-w-full"
+        className="btn btn-primary w-full sm:w-auto max-w-full transition-all duration-200 ease-in-out
+    transform hover:scale-105 hover:shadow-lg
+    focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
         onClick={() => document.getElementById('create_post_modal').showModal()}
       >
         Create Post
@@ -107,15 +109,13 @@ const CreatePostModal = () => {
           <div className="flex justify-end gap-2">
             <form method="dialog">
               <button className="btn">Cancel</button>
+
+              <button className="btn btn-primary" onClick={handlePost}>
+                Post
+              </button>
             </form>
-            <button className="btn btn-primary" onClick={handlePost}>
-              Post
-            </button>
           </div>
         </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>Close</button>
-        </form>
       </dialog>
     </div>
   );

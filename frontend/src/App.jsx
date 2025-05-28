@@ -7,8 +7,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home.jsx';
 import PrivateRoute from './components/Private.jsx';
-import Profile from './pages/Profile';
+import MyProfile from './pages/MyProfile.jsx';
+import Profile from './pages/Profile.jsx';
 import NavBar from './components/NavBar.jsx';
+import GetAllUsers from './components/GetAllUsers.jsx';
 
 const App = () => {
   // const { isLoading } = useContext(AuthContext);
@@ -33,10 +35,26 @@ const App = () => {
         />
 
         <Route
-          path="/profile"
+          path="/me"
+          element={
+            <PrivateRoute>
+              <MyProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId"
           element={
             <PrivateRoute>
               <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <GetAllUsers />
             </PrivateRoute>
           }
         />

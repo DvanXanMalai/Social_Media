@@ -6,6 +6,7 @@ import likeRoutes from './routes/like.js';
 import followRoutes from './routes/follow.js';
 import postRoutes from './routes/post.js';
 import profileRoutes from './routes/profile.js';
+import userRoutes from './routes/users.js';
 
 dotenv.config();
 const app = express();
@@ -19,9 +20,10 @@ app.use(
   }),
 );
 app.use(express.json());
-
-//Routes
+//auth routes
 app.use('/api/auth', authRoutes);
+
+//profile routes
 app.use('/api/profile', profileRoutes);
 
 //Like routes
@@ -35,6 +37,9 @@ app.use('/api/posts', postRoutes);
 // app.get('/api/auth/profile', (req, res) => {
 //   res.send('Welcome to the backend server!');
 // });
+//
+//Users routes
+app.use('/api/users', userRoutes);
 
 //file uplaod
 app.use('/uploads', express.static('uploads'));

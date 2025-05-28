@@ -2,7 +2,6 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 export const likePost = async (req, res) => {
-  console.log('reaches like');
   const { postId } = req.params;
   const parsedPostId = parseInt(postId);
   const userId = req.user.id;
@@ -53,7 +52,6 @@ export const likePost = async (req, res) => {
 };
 
 export const unlikePost = async (req, res) => {
-  console.log('reaches unlike');
   const { postId } = req.params;
   const parsedPostId = parseInt(postId);
   const userId = req.user.id;

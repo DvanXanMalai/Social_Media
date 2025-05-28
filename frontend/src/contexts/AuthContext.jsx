@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   //fetch user profile
   const fetchProfile = async () => {
     try {
-      const res = await axios.get('/profile');
+      const res = await axios.get('/profile/me');
       setUser(res.data);
       setIsLoading(false);
     } catch (error) {

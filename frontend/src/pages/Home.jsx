@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import CreatePostModal from '../components/CreatePostModal';
 import UserPosts from '../components/UserPosts';
+import GetAllUsers from '../components/GetAllUsers'; // adjust path if needed
 
 function Home() {
   const { user, isLoading } = useContext(AuthContext);
@@ -29,10 +30,28 @@ function Home() {
 
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Sidebar or Profile Summary */}
-        <aside className="lg:col-span-1">
+        {/* Feed Section: appears first on mobile */}
+        <main className="order-1 lg:order-2 lg:col-span-2 space-y-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-semibold">Feed</h2>
+            <div className="w-full sm:w-auto">
+              <CreatePostModal />
+            </div>
+          </div>
+
+          {/* Placeholder for posts */}
+          <div className="card bg-base-100 shadow p-4">
+            <p className="text-gray-500 text-center">
+              here will be feed it is under construction xd
+            </p>
+          </div>
+        </main>
+
+        {/* Sidebar: appears second on mobile, left on desktop */}
+        <aside className="order-3 lg:order-1 space-y-6">
+          {/* Profile Card */}
           <div className="card bg-base-100 shadow-md p-4 sm:p-6 flex flex-col items-center gap-4">
-            <Link to="/profile" className="avatar hover:opacity-80 transition">
+            <Link to="/me" className="avatar hover:opacity-80 transition">
               <div className="w-20 sm:w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 {user?.image ? (
                   <img
@@ -53,24 +72,13 @@ function Home() {
               <p className="text-sm text-gray-500 break-all">{user?.email}</p>
             </div>
           </div>
+
+          {/* Discover Users */}
+          <div className="order-2,">
+            <h3 className="text-lg font-semibold mb-2">Discover Users</h3>
+            <GetAllUsers />
+          </div>
         </aside>
-
-        {/* Feed Section */}
-        <main className="lg:col-span-2 space-y-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-            <h2 className="text-xl sm:text-2xl font-semibold">Feed</h2>
-            <div className="w-full sm:w-auto">
-              <CreatePostModal />
-            </div>
-          </div>
-
-          {/* Placeholder for posts */}
-          <div className="card bg-base-100 shadow p-4">
-            <p className="text-gray-500 text-center">
-              here will be feed it is uder construction xd
-            </p>
-          </div>
-        </main>
       </div>
     </div>
   );

@@ -1,16 +1,47 @@
 import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
-export const getProfile = async (req, res) => {
+export const getMyProfile = async (req, res) => {
   try {
     const userId = req.user.id;
     const result = await prisma.user.findUnique({
       where: {
         id: userId,
       },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        image: true,
+        bio: true,
+        // any other safe fields...
+      },
     });
     res.json(result);
   } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+export const getProfile = async (req, res) => {
+  try {
+    const id = req.params.userId;
+    const userId = parseInt(id);
+    const result = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        image: true,
+        bio: true,
+        // any other safe fields...
+      },
+    });
+    res.json(result);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
 };
