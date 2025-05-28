@@ -41,9 +41,7 @@ function Home() {
 
           {/* Placeholder for posts */}
           <div className="card bg-base-100 shadow p-4">
-            <p className="text-gray-500 text-center">
-              here will be feed it is under construction xd
-            </p>
+            <p className="text-gray-500 text-center"></p>
           </div>
         </main>
 

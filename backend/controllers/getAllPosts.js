@@ -1,22 +1,14 @@
 import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
-export const getUsers = async (req, res) => {
+export const getAllPosts = async (req, res) => {
   const currentUserId = req.user.id; // assuming user ID is stored in req.user
   try {
-    const result = await prisma.user.findMany({
+    const result = await prisma.post.findMany({
       where: {
         id: {
           not: currentUserId, // exclude this user
         },
-      },
-      select: {
-        id: true,
-        username: true,
-        email: true,
-        image: true,
-        bio: true,
-        // any other safe fields...
       },
     });
     res.json(result);

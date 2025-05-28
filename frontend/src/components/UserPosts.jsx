@@ -2,18 +2,29 @@ import { useEffect, useState, useContext } from 'react';
 import axios from '../api/axios.js';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 
-const UserPosts = () => {
-  const user = useContext(AuthContext);
-  const userId = user?.user?.id;
+const UserPosts = ({ userId }) => {
+  const { user } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const myId = userId ? userId : user?.id;
+
   const [feed, setFeed] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!myId) return;
+
     const fetchFeed = async () => {
       try {
-        const response = await axios.get(`/posts/${userId}/posts`);
+        const response = await axios.get(`/posts/${myId}/posts`);
         setFeed(response.data);
+
+        if (userId) {
+          const profileRes = await axios.get(`/profile/${myId}`);
+          setCurrentUser(profileRes.data);
+        } else {
+          setCurrentUser(user); // Set only once, not in useState directly
+        }
       } catch (error) {
         console.error('Error fetching feed:', error);
       } finally {
@@ -22,24 +33,20 @@ const UserPosts = () => {
     };
 
     fetchFeed();
-  }, [userId]);
-
-  // const handleLike = async (postId) => {
-  //   const response = await axios.post(`/like/${postId}`);
-  //   console.log('response while liked', response);
+  }, [myId, userId, user]);
   // };
 
   // Handle like or unlike action
   const handleToggleLike = async (post) => {
-    const isLiked = post.likes.some((like) => like.userId === userId);
+    const isLiked = post.likes.some((like) => like.userId === myId);
     try {
       let response;
       if (isLiked) {
         // Unlike the post
-        response = await axios.post(`/unlike/${post.id}`);
+        response = await axios.post(`/unlike/${post.id}/${myId}`);
       } else {
         // Like the post
-        response = await axios.post(`/like/${post.id}`);
+        response = await axios.post(`/like/${post.id}/${myId}`);
       }
 
       // Update the specific post's likes array in local state from backend response
@@ -63,7 +70,7 @@ const UserPosts = () => {
         <div>No posts to display. Share something!</div>
       ) : (
         feed.map((post) => {
-          const isLiked = post.likes.some((like) => like.userId === userId);
+          const isLiked = post.likes.some((like) => like.userId === myId);
           const likeCount = post.likes.length;
 
           return (
@@ -75,14 +82,14 @@ const UserPosts = () => {
                 <div className="flex gap-4">
                   <div className="avatar">
                     <div className="w-12 rounded-full">
-                      {user?.user.image ? (
-                        <img src={user.user.image} alt="User Avatar" />
+                      {currentUser?.image ? (
+                        <img src={currentUser?.image} alt="User Avatar" />
                       ) : null}
                     </div>
                   </div>
 
                   <p className="text-lg">
-                    <strong></strong> {user.user.username}
+                    <strong></strong> {currentUser?.username}
                   </p>
                 </div>
                 {/* Post content here... */}

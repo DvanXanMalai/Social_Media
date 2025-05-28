@@ -4,26 +4,18 @@ import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate
 import { AuthContext } from '../contexts/AuthContext.jsx'; // Import AuthContext to access current user
 
 const GetAllUsers = () => {
-  const { user } = useContext(AuthContext); // Access the AuthContext to get the current user
-  const currentUserId = user?.id; // Get the current user's ID from the context
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleViewProfile = (userId) => {
-    navigate(`/profile/${userId}`); // Navigate to the profile page with the user's ID
+  const handleViewProfile = (myId) => {
+    navigate(`/profile/${myId}`); // Navigate to the profile page with the user's ID
   };
   const [users, setUsers] = useState([]);
-  // setLoading(true);
-  // setError('');
-  //
 
   useEffect(() => {
-    if (!currentUserId) return; // If no current user, exit early
-    // const response = await axios.get(`/users`);
     axios.get('/users').then((res) => {
-      const filtered = res.data.filter((u) => u.id !== parseInt(currentUserId));
-      setUsers(filtered);
+      setUsers(res.data);
     });
-  }, [currentUserId]); // Fetch users when currentUserId changes
+  }, []); // Fetch users when currentUserId changes
 
   //get all users
 

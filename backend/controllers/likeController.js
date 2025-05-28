@@ -2,9 +2,9 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 export const likePost = async (req, res) => {
-  const { postId } = req.params;
+  const { postId, userId } = req.params;
   const parsedPostId = parseInt(postId);
-  const userId = req.user.id;
+  const parsedUserId = parseInt(userId);
 
   try {
     // Check if the post exists
@@ -21,7 +21,10 @@ export const likePost = async (req, res) => {
     // Check if the user has already liked the post
     const existingLike = await prisma.like.findUnique({
       where: {
-        userId_postId: { userId, postId: parsedPostId },
+        userId_postId: {
+          userId: parsedUserId,
+          postId: parsedPostId,
+        },
       },
     });
 
@@ -32,7 +35,7 @@ export const likePost = async (req, res) => {
     // Create a new like
     await prisma.like.create({
       data: {
-        userId,
+        userId: parsedUserId,
         postId: parsedPostId,
       },
     });
@@ -52,9 +55,9 @@ export const likePost = async (req, res) => {
 };
 
 export const unlikePost = async (req, res) => {
-  const { postId } = req.params;
+  const { postId, userId } = req.params;
   const parsedPostId = parseInt(postId);
-  const userId = req.user.id;
+  const parsedUserId = parseInt(userId);
 
   try {
     // Check if the post exists
@@ -72,13 +75,14 @@ export const unlikePost = async (req, res) => {
     const existingLike = await prisma.like.findUnique({
       where: {
         userId_postId: {
-          userId,
+          userId: parsedUserId,
           postId: parsedPostId,
         },
       },
     });
 
     if (!existingLike) {
+      console.log('here');
       return res.status(400).json({ message: 'Post not liked yet' });
     }
 
@@ -86,7 +90,7 @@ export const unlikePost = async (req, res) => {
     await prisma.like.delete({
       where: {
         userId_postId: {
-          userId,
+          userId: parsedUserId,
           postId: parsedPostId,
         },
       },
