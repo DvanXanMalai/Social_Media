@@ -3,7 +3,8 @@ const prisma = new PrismaClient();
 
 export const followUser = async (req, res) => {
   const { userId } = req.params;
-  if (parseInt(userId) === req.user.id) {
+  const parsedUserId = parseInt(userId);
+  if (parsedUserId === req.user.id) {
     return res.status(400).json({ message: 'You cannot follow yourself' });
   }
 
@@ -12,7 +13,7 @@ export const followUser = async (req, res) => {
       where: {
         followerId_followingId: {
           followerId: req.user.id,
-          followingId: parseInt(userId),
+          followingId: parsedUserId,
         },
       },
     });
@@ -21,13 +22,14 @@ export const followUser = async (req, res) => {
         .status(400)
         .json({ message: 'You are already following this user' });
     }
-    await prisma.follow.create({
+    const response = await prisma.follow.create({
       data: {
         followerId: req.user.id,
-        followingId: parseInt(userId),
+        followingId: parsedUserId,
       },
     });
-    res.status(200).json({ message: 'Followed user successfully' });
+    console.log('response', response);
+    res.status(200).json(response.data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -87,4 +89,3 @@ export const getFollowing = async (req, res) => {
     res.status(500).json({ message: 'error getting following' });
   }
 };
-

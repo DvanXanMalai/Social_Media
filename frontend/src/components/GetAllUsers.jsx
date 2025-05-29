@@ -9,6 +9,10 @@ const GetAllUsers = () => {
   const handleViewProfile = (myId) => {
     navigate(`/profile/${myId}`); // Navigate to the profile page with the user's ID
   };
+  const handleFollowUser = async (userId) => {
+    const following = await axios.post(`/follow/${userId}`);
+    console.log(following);
+  };
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -40,6 +44,18 @@ const GetAllUsers = () => {
           <h3 className="text-lg font-bold text-primary">{user.username}</h3>
           <p className="text-sm text-gray-400">{user.email}</p>
           {user.bio && <p className="text-xs text-gray-500 mt-1">{user.bio}</p>}
+
+          <button
+            className=" mt-4 px-4 py-2 text-sm font-semibold
+    btn btn-primary rounded-lg
+
+    transition-all duration-200 ease-in-out
+    transform hover:scale-105 hover:shadow-lg
+    focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
+            onClick={() => handleFollowUser(user.id)}
+          >
+            Follow
+          </button>
           <button
             className=" mt-4 px-4 py-2 text-sm font-semibold
     btn btn-primary rounded-lg
