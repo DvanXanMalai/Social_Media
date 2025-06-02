@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import CreatePostModal from '../components/CreatePostModal';
-import UserPosts from '../components/UserPosts';
+import Feed from '../components/Feed';
 import GetAllUsers from '../components/GetAllUsers'; // adjust path if needed
 
 function Home() {
@@ -41,6 +41,7 @@ function Home() {
 
           {/* Placeholder for posts */}
           <div className="card bg-base-100 shadow p-4">
+            <Feed />
             <p className="text-gray-500 text-center"></p>
           </div>
         </main>
