@@ -65,7 +65,7 @@ const UserPosts = ({ userId }) => {
   if (loading) return <div className="p-4">Loading feed...</div>;
 
   return (
-    <div className="p-4 space-y-6 max-w-2xl w-full mx-auto border border-gray-500 rounded-md">
+    <div className="p-4 space-y-6 max-w-2xl w-full mx-auto rounded-2xl">
       {feed.length === 0 ? (
         <div>No posts to display. Share something!</div>
       ) : (
@@ -74,10 +74,7 @@ const UserPosts = ({ userId }) => {
           const likeCount = post.likes.length;
 
           return (
-            <div
-              key={post.id}
-              className="card w-full bg-base-100 shadow-xl border border-base-200"
-            >
+            <div key={post.id} className="card w-full bg-base-100  shadow-xl  ">
               <div className="card-body bg-base-200 ">
                 <div className="flex gap-4">
                   <div className="avatar">

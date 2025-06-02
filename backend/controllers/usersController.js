@@ -16,6 +16,8 @@ export const getUsers = async (req, res) => {
         email: true,
         image: true,
         bio: true,
+        following: true,
+        followers: true,
         // any other safe fields...
       },
     });

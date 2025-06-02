@@ -14,6 +14,8 @@ export const getMyProfile = async (req, res) => {
         email: true,
         image: true,
         bio: true,
+        following: true,
+        followers: true,
         // any other safe fields...
       },
     });
@@ -36,6 +38,8 @@ export const getProfile = async (req, res) => {
         email: true,
         image: true,
         bio: true,
+        following: true,
+        followers: true,
         // any other safe fields...
       },
     });

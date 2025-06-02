@@ -40,7 +40,16 @@ const Profile = () => {
       <p className="text-lg text-center max-w-sm">
         <strong>Bio:</strong> {user.bio || 'No bio yet.'}
       </p>
-      {('userid', user.id)}
+      <div className="flex gap-2">
+        <p className="text-lg text-center max-w-sm">
+          <strong></strong>{' '}
+          {user?.followers?.length + ' Followers' || 'No Followers yet.'}
+        </p>
+        <p className="text-lg text-center max-w-sm">
+          <strong></strong>{' '}
+          {user?.following?.length + ' Following' || 'Not Following anyone.'}
+        </p>
+      </div>
       {currentUser?.id !== user?.id ? (
         <UserPosts userId={user.id} />
       ) : (

@@ -28,8 +28,7 @@ export const followUser = async (req, res) => {
         followingId: parsedUserId,
       },
     });
-    console.log('response', response);
-    res.status(200).json(response.data);
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -39,7 +38,7 @@ export const followUser = async (req, res) => {
 export const unFollowUser = async (req, res) => {
   const { userId } = req.params;
   try {
-    await prisma.follow.delete({
+    const response = await prisma.follow.delete({
       where: {
         followerId_followingId: {
           followerId: req.user.id,
@@ -47,7 +46,7 @@ export const unFollowUser = async (req, res) => {
         },
       },
     });
-    res.status(200).json({ message: 'Unfollowed user successfully' });
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'error unfoloowing user' });

@@ -5,13 +5,32 @@ import { AuthContext } from '../contexts/AuthContext.jsx'; // Import AuthContext
 
 const GetAllUsers = () => {
   const navigate = useNavigate(); // Initialize useNavigate
+  const { user: userContext } = useContext(AuthContext);
+  const [userData, setUserData] = useState(userContext);
 
   const handleViewProfile = (myId) => {
     navigate(`/profile/${myId}`); // Navigate to the profile page with the user's ID
   };
+
   const handleFollowUser = async (userId) => {
-    const following = await axios.post(`/follow/${userId}`);
-    console.log(following);
+    const response = await axios.post(`/follow/${userId}`);
+    const newFollow = response.data;
+
+    setUserData((prev) => ({
+      ...prev,
+      following: [...prev.following, newFollow],
+    }));
+  };
+
+  const handleUnfollowUser = async (userId) => {
+    const response = await axios.delete(`/follow/${userId}`);
+    const newFollow = response.data;
+
+    // Remove the follow record where followingId matches userId
+    setUserData((prev) => ({
+      ...prev,
+      following: prev.following.filter((item) => item.followingId !== userId),
+    }));
   };
   const [users, setUsers] = useState([]);
 
@@ -41,32 +60,40 @@ const GetAllUsers = () => {
               />
             </div>
           </div>
-          <h3 className="text-lg font-bold text-primary">{user.username}</h3>
+          <h3
+            className="text-lg font-bold text-primary cursor-pointer"
+            onClick={() => handleViewProfile(user.id)}
+          >
+            {user.username}
+          </h3>
           <p className="text-sm text-gray-400">{user.email}</p>
           {user.bio && <p className="text-xs text-gray-500 mt-1">{user.bio}</p>}
 
-          <button
-            className=" mt-4 px-4 py-2 text-sm font-semibold
+          {userData.following.some((item) => item.followingId === user.id) ? (
+            <button
+              className=" mt-4 px-4 py-2 text-sm font-semibold
     btn btn-primary rounded-lg
 
     transition-all duration-200 ease-in-out
     transform hover:scale-105 hover:shadow-lg
     focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
-            onClick={() => handleFollowUser(user.id)}
-          >
-            Follow
-          </button>
-          <button
-            className=" mt-4 px-4 py-2 text-sm font-semibold
+              onClick={() => handleUnfollowUser(user.id)}
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              className=" mt-4 px-4 py-2 text-sm font-semibold
     btn btn-primary rounded-lg
 
     transition-all duration-200 ease-in-out
     transform hover:scale-105 hover:shadow-lg
     focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-50"
-            onClick={() => handleViewProfile(user.id)}
-          >
-            View Profile
-          </button>
+              onClick={() => handleFollowUser(user.id)}
+            >
+              Follow
+            </button>
+          )}
         </div>
       ))}
     </div>
